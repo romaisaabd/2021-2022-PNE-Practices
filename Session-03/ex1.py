@@ -9,3 +9,5 @@ for i in range(2,N): #n es una constante
     n1 = n2
     n2 = num
 print()#esto lo hace para que no aparezca un espacio
+#git app . --> hace que todos se metan en github
+#gir add (nombre del file) --> lo mismo que lo de antes pero con un solo file
