@@ -9,14 +9,12 @@ def count_bases(seq):
         d[b] += 1
     return d
 
-#def full_sequence():
 
 
-with open("dna.txt", "r") as f:
-    sequences = f.readlines()
-    print(sequences)
-    for seq in sequences:
-        new_seq = seq.replace("\n", "")
-        print(new_seq)
-        for k, v in count_bases(new_seq).items():
-            print(k + ":", v)
+def print_info():
+    with open("dna.txt", "r") as f:
+        sequences = f.readlines()
+        for seq in sequences:
+            new_seq = seq.replace("\n", "")
+            for k, v in count_bases(new_seq).items():
+                print(k + ":", v)
