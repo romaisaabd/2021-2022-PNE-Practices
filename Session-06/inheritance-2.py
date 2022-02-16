@@ -1,4 +1,4 @@
-import Seq classmethod
+import Seq 
 class Gene(Seq):
     """This class is derived from the Seq Class
        All the objects of class Gene will inheritate
