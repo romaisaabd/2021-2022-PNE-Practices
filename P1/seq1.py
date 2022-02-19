@@ -46,3 +46,15 @@ class Seq:
         if self.strbases == "NULL" and self.strbases == "ERROR":
             self.strbases = ""
         return len(self.strbases)
+
+    def count_base(self,strbases):
+        """Calculate the bases of the sequence"""
+        d = {"A": 0, "C": 0, "G": 0, "T": 0, }
+        if self.strbases != "":
+            for b in strbases:
+                d[b] += 1
+            return d
+        else:
+            print(d)
+
+
