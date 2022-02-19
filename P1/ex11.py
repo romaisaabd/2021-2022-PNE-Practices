@@ -4,7 +4,7 @@ from seq1 import Seq
 #print(f"Sequence 1: {s1}")
 #print(f"Sequence 2: {s2}")
 
-#ha eliminado lo que habbia debajo de strbases
+#ha eliminado lo que habia debajo de strbases
 
 str_list = ["ACCTGC","Hello? Am I a valid sequence?"]
 sequence_list = []

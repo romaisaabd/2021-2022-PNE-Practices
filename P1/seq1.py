@@ -1,12 +1,14 @@
 class Seq:
     """A class for representing sequences"""
 
-    def __init__(self,strbases):
+    def __init__(self,strbases ="NULL"):
         """Method called when the object is being printed"""
 
         # -- We just return the string with the sequence
         self.strbases = strbases
-        if not self.valid_sequence():
+        if self.strbases == "NULL":
+            print("Null Seq Created")
+        elif not self.valid_sequence():
             self.strbases = "ERROR"
             print("ERROR!!")
         else:
