@@ -7,10 +7,10 @@ class Seq:
         # -- We just return the string with the sequence
         self.strbases = strbases
         if self.strbases == "NULL":
-            print("Null Seq Created")
+            print("NULL Seq Created")
         elif not self.valid_sequence():
             self.strbases = "ERROR"
-            print("ERROR!!")
+            print("INVALID Seq!")
         else:
             print("New sequence created!")
 
@@ -43,4 +43,6 @@ class Seq:
 
     def len(self):
         """Calculate the length of the sequence"""
+        if self.strbases == "NULL" and self.strbases == "ERROR":
+            self.strabases = ""
         return len(self.strbases)
