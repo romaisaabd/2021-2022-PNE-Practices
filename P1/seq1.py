@@ -44,7 +44,7 @@ class Seq:
     def len(self):
         """Calculate the length of the sequence"""
         if self.strbases == "NULL" and self.strbases == "ERROR":
-            self.strbases = "0"
+            self.strbases = ""
         else:
             return len(self.strbases)
 
