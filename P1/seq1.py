@@ -1,7 +1,7 @@
 class Seq:
     """A class for representing sequences"""
 
-    def __init__(self,strbases ="NULL"):
+    def __init__(self, strbases ="NULL"):
         """Method called when the object is being printed"""
 
         # -- We just return the string with the sequence
@@ -44,5 +44,5 @@ class Seq:
     def len(self):
         """Calculate the length of the sequence"""
         if self.strbases == "NULL" and self.strbases == "ERROR":
-            self.strabases = ""
+            self.strbases = ""
         return len(self.strbases)
