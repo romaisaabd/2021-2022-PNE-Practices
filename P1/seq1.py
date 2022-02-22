@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 class Seq:
     """A class for representing sequences"""
 
@@ -44,18 +47,87 @@ class Seq:
     def len(self):
         """Calculate the length of the sequence"""
         if self.strbases == "NULL" or self.strbases == "ERROR":
-            return 0
+            result = 0
         else:
-            return len(self.strbases)
+            result = len(self.strbases)
+        return result
 
-    def count_base(self,strbases):
-        """Calculate the bases of the sequence"""
+    def count_base(self,list_bases):
+        """Calculate the number of bases using lists"""
+        count = 0
+        if self.strbases == "ERROR" or self.strbases == "NULL":
+            count = 0
+        else:
+            for s in self.strbases:
+                if s == list_bases:
+                    count += 1
+        return count
+
+    def count(self,strbases):
+        """Calculate the bases of the sequence using dictionaries"""
         d = {"A": 0, "C": 0, "G": 0, "T": 0, }
         if self.strbases != "ERROR" and self.strbases != "NULL":
             for b in strbases:
                 d[b] += 1
-            return d
+            result = d
         else:
-            return d
+            result = d
+        return result
+
+    def reverse(self):
+        if self.strbases == "ERROR" or self.strbases == "NULL":
+            result = self.strbases
+        else:
+            result = ''.join(reversed(self.strbases))
+        return result
+
+    def complement(self,strbases):
+        if self.strbases != "ERROR" or self.strbases != "NULL":
+            complementary_bases = {"A": "T", "T": "A", "C": "G", "G": "C"}
+            for b in strbases:
+                complementary_bases[b] == a
+            result=
+
+
+
+
+        else:
+            result = self.strbases
+        return result
+
+    def seq_complement(self):
+        if self.strbases == "NULL" or self.strbases == "ERROR":
+            return self.strbases
+        else:
+            complement_dict = {"A": "C", "C": "A", "T": "G", "G": "T"}
+            new_seq = ""
+
+            for e in self.strbases:
+                for b in complement_dict:
+                    if e == b:
+                        new_seq += complement_dict[b]
+
+            return new_seq
+
+    def read_fasta(self,filename):
+        seq = Path(filename).read_text()
+        new_seq = seq.find("\n")
+        seq = seq[new_seq:].replace("\n", "")
+        self.strbases = seq
+        return seq
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
