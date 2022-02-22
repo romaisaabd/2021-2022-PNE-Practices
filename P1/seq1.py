@@ -115,6 +115,7 @@ class Seq:
         seq = seq[new_seq:].replace("\n", "")
         self.strbases = seq
         return seq
+    
 
 
 
