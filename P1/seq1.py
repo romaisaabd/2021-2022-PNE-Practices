@@ -1,5 +1,3 @@
-from pathlib import Path
-
 
 class Seq:
     """A class for representing sequences"""
@@ -110,12 +108,11 @@ class Seq:
             return new_seq
 
     def read_fasta(self,filename):
-        seq = Path(filename).read_text()
+        seq = open( "../P0/sequences/" +filename +".txt","r").read()
         new_seq = seq.find("\n")
         seq = seq[new_seq:].replace("\n", "")
         self.strbases = seq
-        return seq
-    
+
 
 
 
