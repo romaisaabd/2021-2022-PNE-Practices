@@ -4,8 +4,11 @@ import colorama
 
 # SERVER IP, PORT
 PORT = 8000
-#IP = "212.128.253.64"
-IP = "10.3.46.157"
+#IP = "212.128.253.64"--> IP the la clase de David
+#IP = "10.3.46.157"--> IP of Rafa's teacher
+#IP = "10.3.55.58" #en el server tenia localhost y da error
+#IP = "localhost" --> que es el mismo que poner"127.0.0.1"
+IP = "" #si lo ponemos en el server da igual lo que pongamos en el ip del cliente
 
 # First, create the socket
 # We will always use this parameters: AF_INET y SOCK_STREAM

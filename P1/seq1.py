@@ -2,7 +2,7 @@
 class Seq:
     """A class for representing sequences"""
 
-    def __init__(self, strbases ="NULL"):
+        def __init__(self, strbases ="NULL"):
         """Method called when the object is being printed"""
 
         # -- We just return the string with the sequence
