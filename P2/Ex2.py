@@ -1,6 +1,6 @@
 from client0 import Client
 PRACTICE = 2
-EXERCISE = 1
+EXERCISE = 2
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
@@ -10,9 +10,4 @@ PORT = 8080
 
 # -- Create a client object
 c = Client(IP, PORT)
-
-# -- Test the ping method
-c.ping()
-
-# -- Print the IP and PORTs
-print(f"IP: {c.ip}, {c.port}")
+print(f"Connection to SERVER at {c.ip}, PORT: {c.port}")

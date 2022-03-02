@@ -1,10 +1,30 @@
+import socket
 class Client:
     def __init__(self, ip, port):
+        self.ip = ip
+        self.port = port
 
+    def ping(self):
+        print("OK!")
 
-     self.ip = ip
-     self.port = port
-    if selft.ipype(port) == <'int'>: :
-        print("The IP is not a string.")
-    elif type(port) == <'int'>:
-        print("The Port is not an integer.")
+    def __str__(self):
+        return self.ip, self.port
+
+    def talk(self,msg):
+        # -- Create the socket
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        # establish the connection to the Server (IP, PORT)
+        s.connect((self.ip, self.port))
+
+        # Send data.
+        s.send(str.encode(msg))
+
+        # Receive data
+        response = s.recv(2048).decode("utf-8")
+
+        # Close the socket
+        s.close()
+
+        # Return the response
+        return response
