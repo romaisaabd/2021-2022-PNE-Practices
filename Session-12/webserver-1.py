@@ -31,7 +31,7 @@ def process_client(s):
     # Body (content to send)
 
     # -- Let's start with the body
-    body = "Hello from my first web server!\n"
+    body = "Romaisa Abdeselam Lazrak :)\n"
 
     # -- Status line: We respond that everything is ok (200 code)
     status_line = "HTTP/1.1 200 OK\n"
@@ -79,4 +79,3 @@ while True:
 
         # -- Close the socket
         cs.close()
-        
