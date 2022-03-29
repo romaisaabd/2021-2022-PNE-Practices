@@ -79,7 +79,7 @@ class Seq:
     def complement(self):
         if self.strbases != "ERROR" or self.strbases != "NULL":
             com_bases = {"A": "T", "T": "A", "C": "G", "G": "C"}
-            com_string = ""
+            com_string= ""
             for b in self.strbases:
                 for i in com_bases:
                     if b == i:
@@ -89,18 +89,19 @@ class Seq:
             return self.strbases
 
     def read_fasta(self,filename):
-        seq = open("./sequences/" + filename + ".txt", "r").read()
+        seq = open( "./sequences/" +filename +".txt","r").read()
         new_seq = seq.find("\n")
         seq = seq[new_seq:].replace("\n", "")
         self.strbases = seq
         return seq
 
-    def percentages(self):
-        dict_bases = self.count()
-        sum_values = sum(dict_bases.values())
-        for k, v in dict_bases.items():
-            dict_bases[k] = [v, (v * 100) / sum_values]
-        return dict_bases
+    def percentages_bases(self):
+        diccionary = self.count()
+        sum_values = sum(diccionary.values())
+        for k, v in diccionary.items():
+            diccionary[k] = [v, (v * 100) / sum_values]
+        return diccionary
+
 
 
 
