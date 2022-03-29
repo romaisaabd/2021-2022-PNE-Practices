@@ -1,0 +1,3 @@
+--> Si queremos hacerlo desde la terminal lo que tenemos que hacer es utilizar este command :
+printf "GET 2" | nc 127.0.0.1 8080
+-->
