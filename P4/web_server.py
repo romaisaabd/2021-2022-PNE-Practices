@@ -20,11 +20,12 @@ def process_client(s):
         body = pathlib.Path("HTML/index.html").read_text()
     elif route == "/favicon.ico":
         body = pathlib.Path("HTML/index.html").read_text()
-        #si la ruta es barra info barra --> se debe ejecutar la condición
-    elif
-        filename = route[1:].split("/")[1]
-        body = pathlib.Path("HTML/" + filename + ".html").read_text()
-
+    else:
+        try:
+            filename = route[1:].split("/")[1]
+            body = pathlib.Path("HTML/" + filename + ".html").read_text()
+        except IndexError:
+            body = pathlib.Path("HTML/ERROR.html").read_text()
     status_line = "HTTP/1.1 200 OK\n"
     header = "Content-Type: text/html\n"
     header += f"Content-Length: {len(body)}\n"
