@@ -94,19 +94,9 @@ class Seq:
         self.strbases = seq
         return seq
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def percent_bases(self):
+        dictionary = self.count()
+        total = len(self.strbases)
+        for k in dictionary:
+            dictionary[k] = (dictionary[k] / total * 100)
+        return dictionary

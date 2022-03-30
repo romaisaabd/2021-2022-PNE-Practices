@@ -1,6 +1,6 @@
 from client0 import Client
 IP = "localhost"
-PORT = 8082
+PORT = 6791
 sequence = "ACGTGCGA"
 genes = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
 
@@ -22,6 +22,7 @@ print(msg)
 print(f"* Testing COMP {sequence}...")
 msg = c.talk(f"COMP {sequence}")
 print(msg)
+
 
 print(f"* Testing REV {sequence}...")
 msg = c.talk(f"REV {sequence}")

@@ -1,8 +1,13 @@
 from seq1 import Seq
 print("-----| Practice 1, Exercise 9 |------")
-# -- Create a Null sequence
-s = Seq()
-# -- Initialize the null seq with the given file in fasta format
-s.read_fasta("U5")
-print(s)
-print(s.len())
+try:
+      s1 = Seq()
+      s1.read_fasta("U5")
+      print(f"Sequence: (Length: {s1.len()}"")", s1,
+            "\n\tBases:",s1.count(),
+            "\n\tRev:",s1.reverse(),
+            "\n\tComp:",s1.complement())
+
+except FileNotFoundError:
+      print("The file has not been found.")
+

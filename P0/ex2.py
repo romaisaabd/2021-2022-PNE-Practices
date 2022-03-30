@@ -1,5 +1,7 @@
 import seq0
-FOLDER = "./sequences/"
-sequence = seq0.seq_read_fasta((seq0.valid_filename(FOLDER)), FOLDER)
+filename = seq0.valid_filename()
+sequence = seq0.seq_read_fasta(filename)
+
+print("DNA filename: ", filename)
 print("The first 20  bases:", sequence[0:20])
 
