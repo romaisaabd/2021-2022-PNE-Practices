@@ -58,11 +58,11 @@ class Seq:
                     count += 1
         return count
 
-    def count(self,strbases):
+    def count(self):
         """Calculate the bases of the sequence using dictionaries"""
         d = {"A": 0, "C": 0, "G": 0, "T": 0, }
         if self.strbases != "ERROR" and self.strbases != "NULL":
-            for b in strbases:
+            for b in self.strbases:
                 d[b] += 1
             result = d
         else:
@@ -88,19 +88,22 @@ class Seq:
         else:
             return self.strbases
 
-    def read_fasta(self,filename):
-        seq = open( "./sequences/" +filename +".txt","r").read()
-        new_seq = seq.find("\n")
-        seq = seq[new_seq:].replace("\n", "")
+    def read_fasta(self, filename):
+        seq = open("./sequences/" + filename + ".txt", "r").read()
+        seq = seq[seq.find("\n"):].replace("\n", "")
         self.strbases = seq
         return seq
 
-    def percentages_bases(self):
-        diccionary = self.count()
-        sum_values = sum(diccionary.values())
-        for k, v in diccionary.items():
-            diccionary[k] = [v, (v * 100) / sum_values]
-        return diccionary
+    def percent_bases(self):
+        dictionary = self.count()
+        total = len(self.strbases)
+        for k in dictionary:
+            dictionary[k] = (dictionary[k] / total * 100)
+        return dictionary
+
+
+
+
 
 
 

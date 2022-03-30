@@ -1,30 +1,46 @@
 import socket
+
 from seq1 import Seq
-from termcolor import colored
+
+import termcolor
+
+
+def count_bases(arg):
+    d = {"A": 0, "C": 0, "G": 0, "T": 0, }
+    for b in str(arg):
+        d[b] += 1
+    total = sum(d.values())
+    for k, v in d.items():
+        d[k] = [v, (v * 100) / total]
+    return d
+
+
+def convert_msg(base_count):
+    message = ""
+    for k, v in base_count.items():
+        message += k + ":" + str(v[0]) + "(" + str(round(v[1], 1)) + "%" + ")" + "\n"
+    return message
+
 
 def info_operation():
-    arg = split_list[1]
+    base_count = count_bases(arg)
     response = "Sequence:" + arg + "\n"
-    response += "Total length:" + str(seq.len()) + "\n"
-    dictionary_bases = seq.percentages_bases()
-    response += ""
-    for k, v in dictionary_bases.items():
-        response += k + ":" + str(v[0]) + "(" + str(round(v[1], 1)) + "%" + ")" + "\n"
+    response += "Total length:" + str(len(arg)) + "\n"
+    response += convert_msg(base_count)
     return response
 
 
-sequences = ["ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCA",
+sequences = ["CAAGGTCCCCTTCTTCCTTTCCATTCCCGTCAGCTTCATTTCCCTAATCTCCGTACAAAT",
              "AAAAACATTAATCTGTGGCCTTTCTTTGCCATTTCCAACTCTGCCACCTCCATCGAACGA",
-             "CAAGGTCCCCTTCTTCCTTTCCATTCCCGTCAGCTTCATTTCCCTAATCTCCGTACAAAT",
              "CCCTAGCCTGACTCCCTTTCCTTTCCATCCTCACCAGACGCCCGCATGCCGGACCTCAAA",
-             "AGCGCAAACGCTAAAAACCGGTTGAGTTGACGCACGGAGAGAAGGGGTGTGTGGGTGGGT"]
-
+             "AGCGCAAACGCTAAAAACCGGTTGAGTTGACGCACGGAGAGAAGGGGTGTGTGGGTGGGT",
+             "ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCA"]
 
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-PORT = 8080
 IP = "127.0.0.1"
+PORT = 8082
 
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -34,26 +50,26 @@ ls.listen()
 print("The server is configured!")
 
 while True:
-    print("Waiting for Clients to connect")
+    print("Waiting for Clients to connect...")
+
     try:
         (cs, client_ip_port) = ls.accept()
+
     except KeyboardInterrupt:
         print("Server stopped by the user")
         ls.close()
         exit()
+
     else:
         print("A client has connected to the server!")
         msg_raw = cs.recv(2048)
-
-        msg = msg_raw.decode().replace("\n", "").strip()
+        msg = msg_raw.decode().replace("\n", "").strip().upper()
         split_list = msg.split(" ")
-
         cmd = split_list[0]
-        print(colored(cmd, "green"))
 
-        if cmd != "PING" and cmd != "GET":
+        if cmd != "PING":
             arg = split_list[1]
-            seq = Seq(arg)
+        termcolor.cprint(f"{cmd}", "green")
 
         if cmd == "PING":
             response = "OK\n"
@@ -61,37 +77,36 @@ while True:
         elif cmd == "GET":
             arg = split_list[1]
             try:
-                index = int(arg)
-                needed_seq = sequences[index]
-                response = needed_seq
+                response = sequences[int(arg)] + "\n"
             except ValueError:
-                response = "The argument must be an INTEGER number between 0 and 4\n"
+                response = "The argument must be an integer number."
             except IndexError:
-                response = "The argument must be a number between 0 and 4\n"
-
+                response = "The argument must be a number between 0 and 4 both included\n"
 
         elif cmd == "REV":
-            response = seq.reverse() + "\n"
+            response = arg[::-1] + "\n"
             print(response)
 
         elif cmd == "INFO":
             try:
-                response = info_operation()
+                response = info_operation(arg)
                 print(response)
             except ZeroDivisionError:
-                response = "Can not perform this operation\n"
+                response = "Pycharm cannot preform this operation (we cannot divide by 0) \n"
 
         elif cmd == "COMP":
-            response = seq.complement() + "\n"
+            sequence = Seq(arg)
+            response = sequence.complement() + "\n"
             print(response)
 
         elif cmd == "GENE":
             try:
-                s1 = Seq()
-                response = s1.read_fasta(str(arg))
+                sequence = Seq()
+                response = sequence.read_fasta(str(arg)) + "\n"
                 print(response)
             except FileNotFoundError:
-                response = "The file was not found\n"
+                response = "The file does not exist.\n"
+
 
         else:
             response = "This command is not available in the server.\n"

@@ -4,11 +4,12 @@ class Client:
         self.ip = ip
         self.port = port
 
+    @staticmethod
     def ping(self):
         print("OK!")
 
     def __str__(self):
-        return "Connection to SERVER at "  +  str(self.ip) + "," + " PORT: " + str(self.port)
+        return "Connection to SERVER at " +  str(self.ip) + "," + " PORT: " + str(self.port)
 
     def talk(self, msg):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
