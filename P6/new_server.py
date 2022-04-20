@@ -1,3 +1,5 @@
+from urllib.parse import parse_qs
+
 def read_html_file(filename):
     contents = Path(HTML_FOLDER)
 
