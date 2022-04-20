@@ -21,7 +21,7 @@ def process_client(s):
     elif route == "/favicon.ico":
         body = pathlib.Path("HTML/index.html").read_text()
         #si la ruta es barra info barra --> se debe ejecutar la condición
-    elif
+    else:
         filename = route[1:].split("/")[1]
         body = pathlib.Path("HTML/" + filename + ".html").read_text()
 

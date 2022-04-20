@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Practice 6</title>
+  </head>
+  <body>
+    <form action="/ping" method="get">
+      <h1>SEQ2 server</h1>
+      Access to the Server<br>
+      <hr>
+      Is the server alive? <input type="submit" value="PING">
+    </form>
+    <hr>
+    <form action = "/get">
+      Get a sequence.Select a sequence number:
+      <select name="n_sequence"
+        {% for n in range (0,context.n_sequences)%}
+        <option value={{n}}>{{n}}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="GET">
+
+
+    </form>
+  </body>
+</html>

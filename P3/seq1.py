@@ -108,3 +108,7 @@ class Seq:
             d[b + "%"] = round((d[b] / len(arg) * 100), 2)
         response = f"Sequence: {arg}\nTotal length: {len(arg)}\n A: {d['A']} ({d['A%']} %)\n C: {d['C']} ({d['C%']} %)\n G: {d['G']} ({d['G%']} %)\n T: {d['T']} ({d['T%']} %)\n"
         return response
+
+
+
+
