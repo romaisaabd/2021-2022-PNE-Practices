@@ -4,6 +4,7 @@ import termcolor
 from pathlib import Path
 import jinja2 as j
 from urllib.parse import parse_qs, urlparse
+from seq1 import Seq
 
 HTML_FOLDER = "./html/"
 LIST_SEQUENCES = ["ACGTCCAGTAAA", "ACGTAGTTTTTAAACCC", "GGGTAAACTACG",
@@ -79,7 +80,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             n_sequence = int(arguments["n_sequence"][0])
             sequence = LIST_SEQUENCES[n_sequence]
             contents = read_html_file(path[1:] + ".html")\
-                .render(context = {
+                .render(context={
                 "n_sequence": n_sequence,
                 "sequence": sequence
             })
@@ -98,7 +99,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 contents = read_html_file(path[1:] + ".html") \
                     .render(context={
                     "operation": operation,
-                    "result": seq.reverse()
+                    "result": Seq.reverse()
                 })
             elif operation == "info":
                 contents = read_html_file(path[1:] + ".html") \
