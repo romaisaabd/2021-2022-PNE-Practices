@@ -1,8 +1,5 @@
-# -- Example of a client that uses the HTTP.client library
-# -- for requesting the main page from the server
 import http.client
 import json
-from seq1 import Seq
 
 genes_dict = {"SRCAP": "ENSG00000080603",
             "FRAT1": "ENSG00000165879",
@@ -16,17 +13,12 @@ genes_dict = {"SRCAP": "ENSG00000080603",
             "KDR":"ENSG00000128052",
             "ANK2":"ENSG00000145362"
 }
-gene_name = input("Write the gene name: ")
 SERVER = 'rest.ensembl.org'
-ENDPOINT = "/sequence/id/"
+ENDPOINT = "/sequence/id"
 PARAMS = "?content-type=application/json"
-URL = SERVER + ENDPOINT + genes_dict[gene_name] + PARAMS
-print(f"\nServer: {SERVER}\n")
-print(f"\nURL: {URL}\n")
 
-
-
-
+print()
+print(f"\nConnecting to server: {SERVER}\n")
 
 # Connect with the server
 conn = http.client.HTTPConnection(SERVER)
@@ -34,7 +26,7 @@ conn = http.client.HTTPConnection(SERVER)
 # -- Send the request message, using the GET method. We are
 # -- requesting the main page (/)
 try:
-    conn.request("GET", ENDPOINT + genes_dict[gene_name] + PARAMS)  # -- WE DONT PUT THE SERVER HERE
+    conn.request("GET", ENDPOINT + PARAMS)# -- WE DONT PUT THE SERVER HERE
 
     # -- Read the response message from the server
     r1 = conn.getresponse()
@@ -45,13 +37,11 @@ try:
     # -- Read the response's body
     data1 = r1.read().decode("utf-8")
     data1 = json.loads(data1)
-
-    print(f" Gene: {gene_name}\n", f"Description : {data1['desc']}")
-    seq = data1['seq']
-    bases = Seq(seq)
-    print("Total length: ",  bases.info_operation(bases))
-
-
+    # -- Print the received data
+    print("Dictionary of Genes!")
+    print("There are", len(genes_dict),"genes in the dictionary:")
+    for key, value in genes_dict.items():
+        print( key,":-->" + genes_dict[key])
 except ConnectionRefusedError:
     print("ERROR! Cannot connect to the Server")
     exit()

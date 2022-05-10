@@ -1,67 +1,39 @@
+import http.client
 import http.server
-import socketserver
 import termcolor
-from pathlib import Path
-import jinja2 as j
+import pathlib
 from urllib.parse import parse_qs, urlparse
+import jinja2 as j
 from seq1 import Seq
+import json
 
-HTML_FOLDER = "./html/"
-LIST_SEQUENCES = ["ACGTCCAGTAAA", "ACGTAGTTTTTAAACCC", "GGGTAAACTACG",
-                  "CGTAGTACGTA", "TGCATGCCGAT", "ATATATATATATATATATA"]
-LIST_GENES = ["ADA", "FRAT1", "FXN", "RNU5A", "U5"]
+SERVER = 'rest.ensembl.org'
+endpoint = "/info/ping"
+params = "?content-type=application/json"
+print(f"\nConnecting to server: {SERVER}\n")
+print()
 
-def read_html_file(filename):
-    contents = Path(HTML_FOLDER + filename).read_text()
-    contents = j.Template(contents)
-    return contents
+def read_html_file():
 
+def make_ensembl_request(url, params=""):
+    conn = http.client.HTTPConnection(SERVER)
+    parameters = "?content-type=application/json"
+    try:
+        conn.request("GET", endpoint + parameters + params)
+    except ConnectionRefusedError:
+        print("ERROR! Cannot connect to the Server")
+        exit()
+    r1 = conn.getresponse()
+    print(f"Response received!: {r1.status} {r1.reason}\n")
+    data1 = r1.read().decode("utf-8")
+    return json.loads(data1)
 
-def count_bases(seq):
-    d = {"A": 0, "C": 0, "G": 0, "T": 0}
-    for b in seq:
-        d[b] += 1
-
-    total = sum(d.values())
-    for k,v in d.items():
-        d[k] = [v, (v * 100) / total]
-    return d
-
-
-def convert_message(base_count):
-    message = ""
-    for k,v in base_count.items():
-        message += k + ": " + str(v[0]) + " (" + str(v[1]) + "%)" +"\n"
-    return message
-
-def info_operation(arg):
-    base_count = count_bases(arg)
-    response = "<p> Sequence: " + arg + "</p>"
-    response += "<p> Total length: " + str(len(arg)) + "</p>"
-    response += convert_message(base_count)
-    return response
-
-# Define the Server's port
-PORT = 8080
-
-# -- This is for preventing the error: "Port already in use"
-socketserver.TCPServer.allow_reuse_address = True
-
-
-# Class with our Handler. It is a called derived from BaseHTTPRequestHandler
-# It means that our class inheritates all his methods and properties
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         """This method is called whenever the client invokes the GET method
         in the HTTP protocol request"""
-        # Print the request line
         termcolor.cprint(self.requestline, 'green')
-
-        # IN this simple server versioimport urllib.parse as un:
-        # We are NOT processing the client's request
-        # It is a happytest server: It always returns a message saying
-        # that everything is ok
         url_path = urlparse(self.path)
         path = url_path.path
         arguments = parse_qs(url_path.query)
@@ -145,3 +117,17 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
         print("")
         print("Stoped by the user")
         httpd.server_close()
+url = urlparse(self.path)
+path = url.path
+arguments = parse_qs(url.query)
+
+if path == "/listSpecies":
+    n_species = arguments["number_species"]
+    dict_answer = make_ensembl_request("/info/species",)
+    list_species = dict_answer["species"]
+    list_species = list_species[0:n_species]
+    content = read_html_file("html/list_species.html").render(context={"species":list_species})
+
+
+
+
