@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LIST OF GENES</title>
+</head>
+<body style="background-color:sandybrown;">
+<strong>GENES FOUND IN CHROMOSOME {{context.chromo}} START:{{context.start}} AND END:{{context.end}} ARE THE FOLLOWING:
+{% if context.name_genes == [] %}
+    <p>ENTER A VALID CHROMOSOME NAME, END AND START</p>
+{% else %}
+    {% for a in  context.name_genes %}
+    <p>{{a}}</p>
+    {% endfor %}
+{% endif %}</strong>
+<p> <a href="/">Main page</a></p>
+</body>
+</html>

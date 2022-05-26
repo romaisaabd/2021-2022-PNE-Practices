@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!!</title>
+
+</head>
+<body style="background-color: lightseagreen">
+    <h1>Browsing Human and Vertebrates genome</h1>
+    <h2>BASIC Level Services</h2>
+    <p>1) List of species in the genome database</p>
+    <form action ="/listSpecies">
+        Limit:<label>
+        <input type="text" name="limit_species">
+    </label>
+        <p><input type="submit" value="Send"></p>
+    </form>
+    <form action ="/karyotype">
+        <p>2) Information about the karyotype:</p>
+        Select the species: <label>
+        <input type="text" name="specie">
+    </label>
+        <p><input type="submit" value="Send"></p>
+    </form>
+    <form action ="/chromosomeLength">
+        <p>3) Chromosome Length</p>
+            Select the species: <label>
+        <input type="text" name="specie">
+    </label>
+        <p>Select a chromosome: <label>
+            <input type="text" name="chromo">
+        </label></p>
+           <p> <input type="submit" value="Send"></p>
+    </form>
+    <form action="/geneSeq">
+         <p>4) Sequence of given human gene</p>
+        Enter sequence name: <label>
+        <input type="text" name="gene">
+    </label>
+        <p> <input type="submit" value="Send"></p>
+    </form>
+    <form action="/geneInfo">
+         <p>5) Information of given human gene</p>
+        Enter sequence name: <label>
+        <input type="text" name="gene">
+    </label>
+        <p><input type="submit" value="Send"></p>
+    </form>
+    <form action="/geneCalc">
+         <p>6) Calculus of bases of the gene</p>
+        Enter sequence name: <label>
+        <input type="text" name="gene">
+    </label>
+        <p> <input type="submit" value="Send"></p>
+    </form>
+    <form action="/geneList">
+         <p>7) Genes inside a chromosome</p>
+        Enter a human chromosome: <label>
+        <input type="text" name="chromo">
+    </label>
+        <p>Start:<label>
+            <input type="text" name="start">
+        </label></p><p>End:<label>
+        <input type="text" name="end">
+    </label></p>
+        <p><input type="submit" value="Send"></p>
+    </form>
+
+</body>
+</html>
