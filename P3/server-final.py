@@ -104,8 +104,22 @@ while True:
                 print(response)
             except FileNotFoundError:
                 response = "The file does not exist.\n"
+        elif cmd == "TUP":
+            try:
+                sequence = Seq("ACGTACGT")
+                try:
+                    response = str(sequence.len() // int(arg) )
+                except ZeroDivisionError:
+                    response = "We cannot divide by 0"
+            except ValueError:
+                response = "We could not calculate the number of tuples because you did not provide a number."
         else:
             response = "This command is not available in the server.\n"
+
+
+
+
+
 
         cs.send(response.encode())
         cs.close()

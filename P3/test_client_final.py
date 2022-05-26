@@ -32,3 +32,8 @@ for g in genes:
     print(f"* Testing GET {g}...")
     msg = c.talk(f"GENE {g}")
     print(msg)
+
+for n in range(6):
+    print(f"* Testing TUP {n}...")
+    msg = c.talk(f"TUP {n}")
+    print(msg)
